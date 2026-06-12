@@ -26,7 +26,7 @@
   applyTheme(activeTheme);
 
   var headerRow = document.querySelector(".masthead__row");
-  var navToggle = document.querySelector(".navtoggle");
+  var navToggle = document.querySelector(".site-menu-toggle");
   if (headerRow) {
     themeButton = document.createElement("button");
     themeButton.type = "button";
@@ -39,49 +39,51 @@
         window.localStorage.setItem(themeKey, nextTheme);
       } catch (err) {}
     });
-    headerRow.insertBefore(themeButton, navToggle || null);
+    if (navToggle && navToggle.parentNode) {
+      navToggle.parentNode.insertBefore(themeButton, navToggle);
+    } else {
+      headerRow.appendChild(themeButton);
+    }
     applyTheme(activeTheme);
   }
 
-  // mobile nav
-  var toggle = navToggle;
-  var nav = document.querySelector(".mainnav");
-  if (toggle && nav) {
-    toggle.addEventListener("click", function () {
-      var open = nav.classList.toggle("is-open");
-      toggle.setAttribute("aria-expanded", String(open));
-    });
+  // guided site menu
+  var siteMenu = document.querySelector(".site-menu");
+  var menuPanel = siteMenu && siteMenu.querySelector(".site-menu__panel");
+  var menuClosers = siteMenu ? siteMenu.querySelectorAll("[data-menu-close]") : [];
+  var lastMenuFocus = null;
+  function openSiteMenu() {
+    if (!siteMenu || !navToggle) return;
+    lastMenuFocus = document.activeElement;
+    siteMenu.classList.add("is-open");
+    siteMenu.setAttribute("aria-hidden", "false");
+    navToggle.setAttribute("aria-expanded", "true");
+    document.body.classList.add("site-menu-open");
+    window.setTimeout(function () {
+      if (menuPanel) menuPanel.focus();
+    }, 40);
   }
-
-  // services dropdown: click/touch + keyboard support (hover still works on desktop)
-  var svcItem = document.querySelector(".mainnav .navitem");
-  var svcBtn = svcItem && svcItem.querySelector("button");
-  if (svcItem && svcBtn) {
-    var openSvc = function () { svcItem.classList.add("is-open"); svcBtn.setAttribute("aria-expanded", "true"); };
-    var closeSvc = function () { svcItem.classList.remove("is-open"); svcBtn.setAttribute("aria-expanded", "false"); };
-    svcBtn.addEventListener("click", function (e) {
-      e.preventDefault();
-      if (svcItem.classList.contains("is-open")) { closeSvc(); } else { openSvc(); }
+  function closeSiteMenu() {
+    if (!siteMenu || !navToggle) return;
+    siteMenu.classList.remove("is-open");
+    siteMenu.setAttribute("aria-hidden", "true");
+    navToggle.setAttribute("aria-expanded", "false");
+    document.body.classList.remove("site-menu-open");
+    if (lastMenuFocus && typeof lastMenuFocus.focus === "function") lastMenuFocus.focus();
+  }
+  if (siteMenu && navToggle) {
+    navToggle.addEventListener("click", function () {
+      if (siteMenu.classList.contains("is-open")) closeSiteMenu();
+      else openSiteMenu();
     });
-    document.addEventListener("click", function (e) {
-      if (svcItem.classList.contains("is-open") && !svcItem.contains(e.target)) { closeSvc(); }
+    menuClosers.forEach(function (closer) {
+      closer.addEventListener("click", closeSiteMenu);
+    });
+    siteMenu.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", closeSiteMenu);
     });
     document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && svcItem.classList.contains("is-open")) { closeSvc(); svcBtn.focus(); }
-    });
-    svcItem.addEventListener("focusout", function (e) {
-      if (!svcItem.contains(e.relatedTarget)) { closeSvc(); }
-    });
-    // close the menu (and the mobile nav) when a service link is chosen,
-    // so same-page anchor jumps don't leave the menu hanging open
-    svcItem.querySelectorAll(".dropdown a").forEach(function (a) {
-      a.addEventListener("click", function () {
-        closeSvc();
-        if (nav && nav.classList.contains("is-open")) {
-          nav.classList.remove("is-open");
-          if (toggle) { toggle.setAttribute("aria-expanded", "false"); }
-        }
-      });
+      if (e.key === "Escape" && siteMenu.classList.contains("is-open")) closeSiteMenu();
     });
   }
 

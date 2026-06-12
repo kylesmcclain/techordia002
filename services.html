@@ -22,38 +22,64 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/css/app.css?v=20260611-1" />
-<link rel="stylesheet" href="assets/css/effects.css?v=20260611-1" />
+<link rel="stylesheet" href="assets/css/app.css?v=20260612-1" />
+<link rel="stylesheet" href="assets/css/effects.css?v=20260612-1" />
 </head>
 <body>
 <header class="masthead">
   <div class="wrap masthead__row">
-    <a class="brand" href="index.html" aria-label="Techordia home"><img src="assets/img/logo.png?v=20260611-1" alt="Techordia" /></a>
-    <nav class="mainnav" aria-label="Primary">
-      <a href="index.html">Home</a>
-      <div class="navitem">
-        <button type="button" aria-haspopup="true" aria-expanded="false" aria-controls="services-menu">Services</button>
-        <div class="dropdown dropdown--svc" id="services-menu">
-          <a href="managed-it.html">Managed IT</a>
-          <a href="it-projects.html">IT Projects</a>
-          <a href="managed-it.html#help-desk">Help Desk &amp; Support</a>
-          <a href="managed-it.html#cybersecurity">Cybersecurity &amp; Compliance</a>
-          <a href="managed-it.html#cloud">Cloud &amp; Microsoft 365</a>
-          <a href="managed-it.html#backup">Backup &amp; Disaster Recovery</a>
-          <a href="managed-it.html#cameras">Cameras &amp; Door Access</a>
-          <a href="managed-it.html#strategy">IT Strategy &amp; Consulting</a>
-        </div>
-      </div>
-      <a href="techordia-way.html">The Techordia Way</a>
-      <a href="contact.html">Contact</a>
-    </nav>
+    <a class="brand" href="index.html" aria-label="Techordia home"><img src="assets/img/logo.png?v=20260611-2" alt="Techordia" /></a>
     <div class="header-cta">
-      <a href="tel:8779254785" class="textlink nowrap">877·925·4785</a>
+      <a href="tel:8779254785" class="textlink nowrap">877&middot;925&middot;4785</a>
       <a href="contact.html" class="btn btn--primary">Book a consultation</a>
+      <button class="site-menu-toggle" type="button" aria-label="Open site guide" aria-haspopup="dialog" aria-controls="site-menu" aria-expanded="false">
+        <span>Find your path</span><i aria-hidden="true"></i>
+      </button>
     </div>
-    <button class="navtoggle" aria-label="Menu" aria-expanded="false"><span></span></button>
   </div>
 </header>
+
+<div class="site-menu" id="site-menu" aria-hidden="true">
+  <div class="site-menu__backdrop" data-menu-close></div>
+  <aside class="site-menu__panel" role="dialog" aria-modal="true" aria-labelledby="site-menu-title" tabindex="-1">
+    <button class="site-menu__close" type="button" data-menu-close aria-label="Close site guide"><span aria-hidden="true">&times;</span></button>
+    <div class="site-menu__intro">
+      <p class="eyebrow">Start here</p>
+      <h2 id="site-menu-title">What do you need handled?</h2>
+      <p>Choose the situation closest to yours. Every path leads to the same local team and a clear next step.</p>
+    </div>
+    <div class="site-menu__paths" aria-label="Client paths">
+      <a class="site-menu__path" href="managed-it.html"><small>Daily IT ownership</small><strong>Run our IT for us</strong><span>Help desk, devices, Microsoft 365, security, backup, and vendors under one accountable team.</span></a>
+      <a class="site-menu__path" href="it-projects.html"><small>Planned change</small><strong>Handle a project</strong><span>Moves, migrations, hardware refreshes, security rollouts, and cleanup work with a plan.</span></a>
+      <a class="site-menu__path" href="managed-it.html#cybersecurity"><small>Protection</small><strong>Reduce our security risk</strong><span>Practical controls, backups, awareness, and insurer-ready evidence without scare tactics.</span></a>
+      <a class="site-menu__path" href="techordia-way.html"><small>How we work</small><strong>See the Techordia standard</strong><span>How we think, communicate, document, and take ownership of the work.</span></a>
+      <a class="site-menu__path site-menu__path--accent" href="contact.html"><small>Ready to talk</small><strong>Book a consultation</strong><span>Tell us what is going on and we will explain what we would fix first.</span></a>
+    </div>
+    <div class="site-menu__directory">
+      <div>
+        <h3>Services</h3>
+        <a href="managed-it.html">Managed IT</a>
+        <a href="it-projects.html">IT Projects</a>
+        <a href="managed-it.html#help-desk">Help Desk &amp; Support</a>
+        <a href="managed-it.html#cloud">Cloud &amp; Microsoft 365</a>
+        <a href="managed-it.html#backup">Backup &amp; Disaster Recovery</a>
+        <a href="managed-it.html#cameras">Cameras &amp; Door Access</a>
+      </div>
+      <div>
+        <h3>Company</h3>
+        <a href="services.html">How we work</a>
+        <a href="techordia-way.html">The Techordia Way</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div>
+        <h3>Talk to us</h3>
+        <a href="tel:8779254785">877&middot;925&middot;4785</a>
+        <a href="contact.html">Book a free consultation</a>
+        <a href="https://www.linkedin.com/company/techordia-llc" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </aside>
+</div>
 
 <main>
 <!-- selector hero -->
@@ -151,7 +177,7 @@
   </div>
 </footer>
 
-<script src="assets/js/effects.js?v=20260611-1" defer></script>
-<script src="assets/js/site.js?v=20260611-1" defer></script>
+<script src="assets/js/effects.js?v=20260612-1" defer></script>
+<script src="assets/js/site.js?v=20260612-1" defer></script>
 </body>
 </html>
